@@ -378,4 +378,17 @@ class Validator
 	{
 		return (bool) preg_match('/^\d+$/', (string) $value);
 	}
+
+	/**
+	 * mindigits, the field must contain at least the specified number of digits 
+	 * excluding other characters
+	 *
+	 * @param $min the minimum numer of digits
+	 * @return bool true if it passes validation false if it fails
+	 **/
+	protected function mindigits($min, $value)
+	{
+		$numbers = preg_replace("/[^\d.]/", "", $value);
+		return $this->minlength($min, $numbers);
+	}
 }
